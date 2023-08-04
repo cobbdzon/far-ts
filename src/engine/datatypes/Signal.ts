@@ -40,6 +40,10 @@ class Signal<Args extends any[]> {
         this._connections.slice(0).forEach(c => c._handler(...args))
     }
 
+    DisconnectAll() {
+        this._connections = [] // highly distrustful of this
+    }
+
     _disconnect(connection: Connection<Args>) {
         this._connections = this._connections.filter(c => c !== connection)
     }
