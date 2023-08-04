@@ -1,11 +1,11 @@
 import Sprite from "./engine/classes/Sprite.js";
 import RunService from "./engine/services/RunService.js";
 
-RunService.RenderStepped.Connect((data) => {
-	console.log(data?.deltaTime);
+RunService.RenderStepped.Connect((deltaTime) => {
+	console.log(deltaTime)
 })
 
-let cn = RunService.RenderStepped.Connect((data) => {
+let cn = RunService.RenderStepped.Connect((deltaTime) => {
     console.log("fart")
 })
 

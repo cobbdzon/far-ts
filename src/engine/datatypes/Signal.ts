@@ -1,13 +1,15 @@
 // todo: implement tuples for data
 
-type Handler<T> = { (data?: T): void }
+// consolidate Args extends any[] into a single type
 
-class Connection<T> {
-    constructor (_signal: Signal<T>, handler: Handler<T>) {
+type Handler<Args extends any[]> = (...args: Args) => void
+
+class Connection<Args extends any[]> {
+    constructor (_signal: Signal<Args>, handler: Handler<Args>) {
         this._signal = _signal
         this._handler = handler
     }
-    private _signal: Signal<T>
+    private _signal: Signal<Args>
     public _handler
     public Connected: boolean = true
     Disconnect (): void {
@@ -16,20 +18,20 @@ class Connection<T> {
     }
 }
 
-class Signal<T> {
-    private _connections: Connection<T>[] = []
+class Signal<Args extends any[]> {
+    private _connections: Connection<Args>[] = []
 
-    Connect (handler: Handler<T>): Connection<T> {
+    Connect(handler: Handler<Args>): Connection<Args> {
         let _connection = new Connection(this, handler)
         this._connections.push(_connection)
         return _connection
     }
 
-    Fire (data: T) {
-        this._connections.slice(0).forEach(c => c._handler(data))
+    Fire(...args: Args) {
+        this._connections.slice(0).forEach(c => c._handler(...args))
     }
 
-    _disconnect(connection: Connection<T>) {
+    _disconnect(connection: Connection<Args>) {
         this._connections = this._connections.filter(c => c !== connection)
     }
 }
