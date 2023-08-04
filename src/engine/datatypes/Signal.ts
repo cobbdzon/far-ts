@@ -1,18 +1,16 @@
-// todo: implement tuples for data
-
-// consolidate Args extends any[] into a single type
-
 type Handler<Args extends any[]> = (...args: Args) => void
 
 class Connection<Args extends any[]> {
-    constructor (_signal: Signal<Args>, handler: Handler<Args>) {
+    constructor(_signal: Signal<Args>, handler: Handler<Args>) {
         this._signal = _signal
         this._handler = handler
     }
+
     private _signal: Signal<Args>
     public _handler
     public Connected: boolean = true
-    Disconnect (): void {
+
+    Disconnect(): void {
         this.Connected = false
         this._signal._disconnect(this)
     }
@@ -20,6 +18,8 @@ class Connection<Args extends any[]> {
 
 class Signal<Args extends any[]> {
     private _connections: Connection<Args>[] = []
+    // should this have an unusable property which prevents the signal from being fired?
+    // but tbh you should just unreference it once done
 
     Connect(handler: Handler<Args>): Connection<Args> {
         let _connection = new Connection(this, handler)

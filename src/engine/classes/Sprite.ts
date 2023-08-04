@@ -9,10 +9,12 @@ class Sprite extends Instance {
 	public Sprite: HTMLImageElement | undefined = undefined
 
     Render(deltaTime: number) {
-
+        // ! do we really need this?
+        // ! we have a RenderStepped signal right?
+        // ! or is this function just for internal purposes?
     }
     Update(deltaTime: number) {
-        
+        // ! do we really need this?
     }
 }
 
