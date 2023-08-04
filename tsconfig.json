@@ -1,0 +1,28 @@
+{
+	"compilerOptions": {
+		"target": "ES6",
+		// "module": "commonjs",
+		"outDir": "js",
+		"strict": true,
+		"moduleResolution": "Node",
+		"allowSyntheticDefaultImports": true,
+		"forceConsistentCasingInFileNames": true,
+		"allowJs": true,
+		"resolveJsonModule": true // allows to import json via fetch()
+	},
+
+	"watchOptions": {
+		"watchFile": "useFsEvents",
+		"watchDirectory": "useFsEvents",
+
+		"fallbackPolling": "dynamicPriority",
+
+		"synchronousWatchDirectory": true,
+
+		"excludeDirectories": [
+			"node_modules",
+			"js",
+			"**/*.test.ts"
+		]
+	}
+}
