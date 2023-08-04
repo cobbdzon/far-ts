@@ -27,6 +27,15 @@ class Signal<Args extends any[]> {
         return _connection
     }
 
+    Once(handler: Handler<Args>): Connection<Args> {
+        let _connection = new Connection(this, (...args) => {
+            _connection.Disconnect()
+            handler(...args)
+        })
+        this._connections.push(_connection)
+        return _connection
+    }
+
     Fire(...args: Args) {
         this._connections.slice(0).forEach(c => c._handler(...args))
     }
